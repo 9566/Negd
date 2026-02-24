@@ -1,54 +1,89 @@
 import React, { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-const PublicLayout = lazy(() => import("./components/PublicLayout"));
-const AdminLayout = lazy(() => import("./components/AdminLayout"));
-const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+const PublicLayout = lazy(
+  () => import("./components/PublicLayout/PublicLayout"),
+);
+const AdminLayout = lazy(() => import("./components/AdminLayout/AdminLayout"));
+const ProtectedRoute = lazy(
+  () => import("./components/ProtectedRoute/ProtectedRoute"),
+);
 
 // Auth
-const Login = lazy(() => import("./pages/Login"));
-const CentralLogin = lazy(() => import("./pages/CentralLogin"));
-const StateLogin = lazy(() => import("./pages/StateLogin"));
-const DistrictLogin = lazy(() => import("./pages/DistrictLogin"));
+
+const Login = lazy(() => import("./components/Login/Login"));
+const CentralLogin = lazy(
+  () => import("./components/CentralLogin/CentralLogin"),
+);
+const StateLogin = lazy(() => import("./components/StateLogin/StateLogin"));
+const DistrictLogin = lazy(
+  () => import("./components/DistrictLogin/DistrictLogin"),
+);
 
 // Admin pages
-const Dashboard = lazy(() => import("./pages/Dashboard"));
-const CreateActivity = lazy(() => import("./pages/CreateActivity"));
-const Activities = lazy(() => import("./pages/Activities"));
-const Feedback = lazy(() => import("./pages/Feedback"));
-const QrManagement = lazy(() => import("./pages/Admin/QrManagement/QrManagement"));
-const AddQr = lazy(() => import("./pages/Admin/QrManagement/AddQr"));
-const AllPledgeReport = lazy(() => import("./pages/Admin/AllPledgeReport"));
-const BureauStatusReport = lazy(() => import("./pages/Admin/BureauStatusReport"));
-const StateUtDistrictActivity = lazy(() => import("./pages/Admin/StateUtDistrictActivity"));
-const ActivityDetails = lazy(() => import("./pages/ActivityDetails"));
-const DnoListPage = lazy(() => import("./pages/DnoListPage"));
-const ImportantDocuments = lazy(() => import("./pages/ImportantDocuments"));
+const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
+const CreateActivity = lazy(
+  () => import("./components/CreateActivity/CreateActivity"),
+);
+const Activities = lazy(() => import("./components/Activities/Activities"));
+const Feedback = lazy(() => import("./components/Feedback/Feedback"));
+const AllPledgeReport = lazy(
+  () => import("./components/AllPledgeReport/AllPledgeReport"),
+);
+const BureauStatusReport = lazy(
+  () => import("./components/BureauStatusReport/BureauStatusReport"),
+);
+const ActivityDetails = lazy(
+  () => import("./components/ActivityDetails/ActivityDetails"),
+);
+const DnoListPage = lazy(() => import("./components/DnoListPage/DnoListPage"));
+const ImportantDocuments = lazy(
+  () => import("./components/ImportantDocuments/ImportantDocuments"),
+);
 
 // New pages
-const UserManagement = lazy(() => import("./pages/UserManagement"));
-const AddUser = lazy(() => import("./pages/AddUser"));
-const EditUser = lazy(() => import("./pages/EditUser"));
-const Reports = lazy(() => import("./pages/Reports"));
-const DataEntryForm = lazy(() => import("./pages/DataEntryForm"));
-const Profile = lazy(() => import("./pages/Profile"));
-const ChangePassword = lazy(() => import("./pages/ChangePassword"));
-const Notifications = lazy(() => import("./pages/Notifications"));
-const Settings = lazy(() => import("./pages/Settings"));
+const UserManagement = lazy(
+  () => import("./components/UserManagement/UserManagement"),
+);
+const AddUser = lazy(() => import("./components/AddUser/AddUser"));
+const EditUser = lazy(() => import("./components/EditUser/EditUser"));
+const Reports = lazy(() => import("./components/Reports/Reports"));
+const DataEntryForm = lazy(
+  () => import("./components/DataEntryForm/DataEntryForm"),
+);
+const Profile = lazy(() => import("./components/Profile/Profile"));
+const ChangePassword = lazy(
+  () => import("./components/ChangePassword/ChangePassword"),
+);
+const Notifications = lazy(
+  () => import("./components/Notifications/Notifications"),
+);
+const Settings = lazy(() => import("./components/Settings/Settings"));
 
 // Public pages
-const NmbaPublicDashboard = lazy(() => import("./pages/NmbaPublicDashboard"));
-const Helpline = lazy(() => import("./pages/PublicDashboard"));
-const Pledge = lazy(() => import("./pages/Pledge"));
-const Facilities = lazy(() => import("./pages/Facilities"));
-const ActivitySnapshot = lazy(() => import("./pages/ActivitySnapshot"));
-const Help = lazy(() => import("./pages/Help"));
+const NmbaPublicDashboard = lazy(
+  () => import("./components/NmbaPublicDashboard/NmbaPublicDashboard"),
+);
+const Helpline = lazy(
+  () => import("./components/PublicDashboard/PublicDashboard"),
+);
+const Pledge = lazy(() => import("./components/Pledge/Pledge"));
+const Facilities = lazy(() => import("./components/Facilities/Facilities"));
+const ActivitySnapshot = lazy(
+  () => import("./components/ActivitySnapshot/ActivitySnapshot"),
+);
+const Help = lazy(() => import("./components/Help/Help"));
 
 const Loading = () => (
-  <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100vh", color: "#6B7280", fontFamily: "var(--font-family)" }}>
-    <div style={{ textAlign: "center" }}>
-      <div style={{ fontSize: "32px", marginBottom: "12px" }}>🏛️</div>
-      <div>Loading...</div>
+  <div className="flex items-center justify-center h-screen bg-gray-50">
+    <div className="text-center">
+      <div className="text-5xl mb-4 animate-pulse">🏛️</div>
+      <div className="text-base font-medium text-gray-700">Loading...</div>
+      <div className="mt-4 flex justify-center gap-2">
+        <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce"></span>
+        <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-100"></span>
+        <span className="w-2 h-2 bg-blue-600 rounded-full animate-bounce delay-200"></span>
+      </div>
     </div>
   </div>
 );
@@ -81,13 +116,16 @@ const App: React.FC = () => {
             <Route path="/activities" element={<Activities />} />
             <Route path="/activity-details/:id" element={<ActivityDetails />} />
             <Route path="/feedback" element={<Feedback />} />
-            <Route path="/qr-management" element={<QrManagement />} />
-            <Route path="/add-qr" element={<AddQr />} />
             <Route path="/all-pledge-report" element={<AllPledgeReport />} />
-            <Route path="/bureau-status-report" element={<BureauStatusReport />} />
-            <Route path="/state-ut-district-activity" element={<StateUtDistrictActivity />} />
+            <Route
+              path="/bureau-status-report"
+              element={<BureauStatusReport />}
+            />
             <Route path="/dno-list" element={<DnoListPage />} />
-            <Route path="/important-documents" element={<ImportantDocuments />} />
+            <Route
+              path="/important-documents"
+              element={<ImportantDocuments />}
+            />
             <Route path="/user-management" element={<UserManagement />} />
             <Route path="/add-user" element={<AddUser />} />
             <Route path="/edit-user/:id" element={<EditUser />} />
